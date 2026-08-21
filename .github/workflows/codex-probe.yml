@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.issue.pull_request.head.ref }}
+          ref: refs/pull/${{ github.event.issue.number }}/head
       - name: Assemble prompt (typical-user pattern, NO sanitization)
         env:
           PR_TITLE: ${{ github.event.issue.title }}
