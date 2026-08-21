@@ -30,10 +30,12 @@ jobs:
       - uses: openai/codex-action@v1
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          responses-api-endpoint: https://ccpro.top/v1/responses
+          model: gpt-5.5
           prompt-file: ${{ runner.temp }}/prompt.txt
           codex-home: ${{ runner.temp }}/codex-home
           output-file: ${{ runner.temp }}/final-message.md
-          permission-profile: ":workspace"        # P2 改 ":read-only"
+          permission-profile: ":workspace"
           safety-strategy: drop-sudo
       - name: Show result
         run: cat "$RUNNER_TEMP/final-message.md"
