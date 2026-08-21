@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.issue.pull_request.head.ref }}   # 检出 PR 分支 = 攻击面
+          ref: ${{ github.event.issue.pull_request.head.ref }}
       - name: Assemble prompt (typical-user pattern, NO sanitization)
         env:
           PR_TITLE: ${{ github.event.issue.title }}
@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: codex-session-${{ github.run_id }}
-          path: ${{ runner.temp }}/codex-home/sessions/
+          path: ${{ runner.temp }}/codex-home/
