@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,3 +47,9 @@ jobs:
         with:
           name: codex-session-${{ github.run_id }}
           path: ${{ runner.temp }}/codex-home/
+      - name: Comment on PR
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          URL: ${{ github.event.issue.comments_url }}
+        run: gh api -X POST "$URL" -f body="$(cat $RUNNER_TEMP/final-message.md)"
